@@ -16,72 +16,41 @@ A classic Asteroids arcade game reimagined with retro neon aesthetics, accelerat
 
 ## Screenshots
 
-<!-- Add your own screenshots to the screenshots/ directory -->
 ![Title Screen](screenshots/title.png)
 ![Gameplay](screenshots/gameplay.png)
 ![Game Over & Scoreboard](screenshots/gameover.png)
 
 ---
 
-## Features & Enhancements
+## Download & Play
 
-This game started as a basic Boot.dev Asteroids tutorial (simple circles, no score, no lives, `sys.exit()` on death) and was rebuilt into a full arcade experience. Here's everything that was added:
+### Standalone App (macOS) — No Python Required
 
-### Core Gameplay
-- **Acceleration-based physics** with momentum, thrust, friction, and speed cap (the original had direct velocity movement)
-- **Screen wrapping** for player, asteroids, and shots (originally objects flew off-screen forever)
-- **Procedurally generated lumpy asteroids** — irregular polygons with 5-10 vertices and slow rotation (originally perfect circles)
-- **Triangular ship hitbox** using SAT (Separating Axis Theorem) collision detection (originally a circular hitbox)
-- **3 weapon types**: Single Shot, Spread Shot (5-bullet fan), and Rapid Fire
+Download the latest release from the [Releases](https://github.com/VarunRazdan/Asteroids/releases) page, unzip, and double-click **Asteroids.app** to play.
 
-### Power-Up System (all new)
-- **Shield** — absorbs one hit, rotating cyan ring visual (10s duration)
-- **Speed boost** — 1.5x max speed for 8 seconds
-- **Weapon upgrades** — spread shot and rapid fire pickups
-- **Bombs** — press B to destroy all on-screen asteroids with a shockwave
-- **Extra lives** — collect to gain an additional life (max 5)
-- Power-ups drop from destroyed medium/large asteroids with 8% chance
+Or build it yourself:
 
-### Scoring & Progression (all new)
-- **Point system**: 100 pts (small), 50 pts (medium), 20 pts (large asteroids)
-- **Combo multiplier** — consecutive kills within 2 seconds build up to 5x multiplier
-- **Persistent top-10 high score board** saved to disk
-- **Classic arcade 3-character name entry** — type A-Z or use arrows
-- **On-screen score popups** that float up and fade
+```bash
+git clone https://github.com/VarunRazdan/Asteroids.git
+cd Asteroids
+uv sync --group dev
+uv run pyinstaller --onedir --windowed --name Asteroids \
+  --hidden-import=pygame._view --hidden-import=pygame.freetype \
+  --hidden-import=numpy main.py
+```
 
-### Visual Effects (all new)
-- **Particle explosions** on asteroid destruction (15-40 particles per explosion)
-- **Thrust flame animation** with flickering inner/outer flame
-- **Screen shake** on impacts (magnitude proportional to asteroid size)
-- **Screen flash** on player death
-- **CRT scanline overlay** for authentic retro feel
-- **Slow-motion effect** on bomb detonation
-- **Parallax starfield background** — 3 depth layers with nebula patches
-- **Neon retro color palette** — cyan, green, yellow, orange, purple accents
+The app will be at `dist/Asteroids.app`. High scores are saved to `~/.victor_asteroids/high_scores.json`.
 
-### Audio (all new)
-- **15 programmatically generated retro sound effects** — lasers, explosions (3 sizes), power-up chimes, shield sounds, bomb blast, death wail, menu blips, game-over jingle
-- **Chiptune background music** — procedurally generated 4-bar loop at 140 BPM
-- **8-channel audio system** with priority-based mixing
+### Run from Source
 
-### Input (all new)
-- **Keyboard controls** (WASD + Space + B)
-- **Xbox/gamepad controller support** — left stick, A/X/RB/Start buttons
-- **Dual input** — keyboard and controller work simultaneously
+Requires **Python 3.13+** and [uv](https://docs.astral.sh/uv/).
 
-### Game States (all new)
-- **Title screen** with ASCII art logo, author credit, and high score
-- **Pause screen** (ESC / Start)
-- **Game over screen** with death delay (explosion visible before transition)
-- **Respawning** with 3-second invulnerability and flashing
-
-### HUD (all new)
-- Score display with pop animation
-- Lives as small ship icons
-- Combo multiplier indicator
-- Active power-up timer bars
-- Bomb count
-- Weapon type label
+```bash
+git clone https://github.com/VarunRazdan/Asteroids.git
+cd Asteroids
+uv sync
+uv run main.py
+```
 
 ---
 
@@ -96,56 +65,89 @@ This game started as a basic Boot.dev Asteroids tutorial (simple circles, no sco
 | Shoot | Space | A / RB |
 | Bomb | B | X |
 | Pause | ESC | Start |
+| Toggle Music | M | Y |
+| Toggle SFX | N | — |
+| Fullscreen | F / F11 | — |
 | Confirm / Start | Enter | A |
 
 ---
 
-## Installation
+## Features & Enhancements
 
-Requires **Python 3.13+** and [uv](https://docs.astral.sh/uv/).
+This game started as a basic Boot.dev Asteroids tutorial (simple circles, no score, no lives, `sys.exit()` on death) and was rebuilt into a full arcade experience.
 
-```bash
-git clone https://github.com/VarunRazdan/Asteroids.git
-cd Asteroids
-uv sync
-```
+### Core Gameplay
+- **Acceleration-based physics** with momentum, thrust, friction, and speed cap
+- **Screen wrapping** for player, asteroids, and shots
+- **Procedurally generated lumpy asteroids** — irregular polygons with slow rotation
+- **Triangular ship hitbox** using SAT (Separating Axis Theorem) collision
+- **3 weapon types**: Single Shot, Spread Shot (5-bullet fan), and Rapid Fire
+- **Alien UFOs** — rare enemy craft that fly across the screen and shoot at you (500 pts, 2 hits to kill)
+- **Black holes** — gravity wells that pull in nearby objects; fly too close and your ship spirals in with a crushing death animation
 
-## Running from Source
+### Power-Up System
+- **Shield** — absorbs one hit, rotating cyan ring visual (10s)
+- **Speed boost** — 1.5x max speed for 8 seconds
+- **Weapon upgrades** — spread shot and rapid fire pickups
+- **Bombs** — destroy all on-screen asteroids with a shockwave
+- **Extra lives** — collect to gain an additional life (max 5)
+- Power-ups drop from destroyed asteroids (8%) and aliens (50%)
 
-```bash
-uv run main.py
-```
+### Scoring & Progression
+- **Point system**: 100/50/20 pts for small/medium/large asteroids, 500 pts for aliens
+- **Combo multiplier** — consecutive kills within 2 seconds build up to 5x
+- **Persistent top-10 high score board** saved to disk
+- **Classic arcade 3-character name entry** — type A-Z, use arrows, or gamepad
 
-## Building a Standalone App (macOS)
+### Visual Effects
+- **Particle explosions** on asteroid/alien destruction
+- **Thrust flame animation** with flickering inner/outer flame
+- **Screen shake** on impacts (proportional to size)
+- **Screen flash** on death
+- **CRT scanline overlay** for retro feel
+- **Slow-motion** on bomb detonation
+- **Black hole visuals** — concentric rotating rings with accretion particles
+- **Parallax starfield background** with nebula patches
+- **Neon retro color palette**
 
-No Python installation required for players:
+### Audio
+- **20 programmatically generated retro sound effects** — weapon-specific lasers, 3 explosion sizes, alien sounds, black hole drone/suck/implosion, power-ups, shield, bomb, death, menu, game over
+- **Chiptune background music** — procedural 4-bar loop at 140 BPM
+- **8-channel audio** with priority mixing
+- **Toggle music (M) and SFX (N)** independently
 
-```bash
-# Install dev dependencies (includes PyInstaller)
-uv sync --group dev
+### Input
+- **Keyboard** (WASD + Space + B)
+- **Xbox/gamepad controller** — left stick, A/X/RB/Start/Y buttons
+- **Dual input** — keyboard and controller simultaneously
+- **Resizable window + fullscreen** (F key)
 
-# Build the .app bundle
-uv run pyinstaller --onedir --windowed --name Asteroids \
-  --hidden-import=pygame._view --hidden-import=pygame.freetype \
-  --hidden-import=numpy main.py
+### Game States
+- **Title screen** with ASCII art, author credit, high score, controls
+- **Pause** (ESC / Start)
+- **Game over** with 1.5s death delay (explosion visible), scoreboard, name entry
+- **Respawning** with 3-second invulnerability
 
-# The app is at dist/Asteroids.app — double-click to play!
-```
+### HUD
+- Score with pop animation
+- Lives as ship icons
+- Combo multiplier
+- Power-up timer bars
+- Bomb count
+- Weapon label
+- Music/SFX toggle indicators
 
-High scores are saved to `~/.victor_asteroids/high_scores.json` so they persist across launches.
+---
 
 ## Testing
 
 ```bash
-# Install dev dependencies
 uv sync --group dev
-
-# Run all tests (headless)
 SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy uv run pytest -v
-
-# Lint
 uv run ruff check .
 ```
+
+157 automated tests (unit, integration, system, security) + CI/CD via GitHub Actions.
 
 ---
 
@@ -153,9 +155,8 @@ uv run ruff check .
 
 - **Python 3.13** + **pygame 2.6.1** + **numpy**
 - **uv** for dependency management
-- **PyInstaller** for standalone app bundling
-- **pytest** for testing (150+ tests)
-- **ruff** for linting
+- **PyInstaller** for standalone macOS app
+- **pytest** (157 tests) + **ruff** for linting
 - **GitHub Actions** for CI/CD
 
 ---

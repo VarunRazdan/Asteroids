@@ -24,11 +24,20 @@ A classic Asteroids arcade game reimagined with retro neon aesthetics, accelerat
 
 ## Download & Play
 
-### Standalone App (macOS) — No Python Required
+### Standalone App — No Python Required
 
-Download the latest release from the [Releases](https://github.com/VarunRazdan/Asteroids/releases) page, unzip, and double-click **Asteroids.app** to play.
+Download the latest release from the [Releases](https://github.com/VarunRazdan/Asteroids/releases) page:
 
-Or build it yourself:
+| Platform | Download | How to Run |
+|----------|----------|------------|
+| **macOS** | `Asteroids-macOS.zip` | Unzip, double-click **Asteroids.app** |
+| **Windows** | `Asteroids-Windows.zip` | Unzip, run **Asteroids/Asteroids.exe** |
+
+High scores are saved to `~/.victor_asteroids/high_scores.json` (macOS) or `%USERPROFILE%\.victor_asteroids\high_scores.json` (Windows).
+
+Releases are built automatically via GitHub Actions for both platforms when a new version is tagged.
+
+### Build It Yourself
 
 ```bash
 git clone https://github.com/VarunRazdan/Asteroids.git
@@ -39,7 +48,7 @@ uv run pyinstaller --onedir --windowed --name Asteroids \
   --hidden-import=numpy main.py
 ```
 
-The app will be at `dist/Asteroids.app`. High scores are saved to `~/.victor_asteroids/high_scores.json`.
+The app will be at `dist/Asteroids.app` (macOS) or `dist\Asteroids\Asteroids.exe` (Windows).
 
 ### Run from Source
 

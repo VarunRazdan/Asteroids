@@ -32,12 +32,8 @@ jobs:
         run: uv sync --group dev
 
       - name: Build with PyInstaller
-        run: |
-          uv run pyinstaller --onedir --windowed --name Asteroids \
-            --hidden-import=pygame._view \
-            --hidden-import=pygame.freetype \
-            --hidden-import=numpy \
-            main.py
+        shell: bash
+        run: uv run pyinstaller --onedir --windowed --name Asteroids --hidden-import=pygame._view --hidden-import=pygame.freetype --hidden-import=numpy main.py
 
       - name: Zip macOS app
         if: runner.os == 'macOS'
@@ -45,7 +41,8 @@ jobs:
 
       - name: Zip Windows app
         if: runner.os == 'Windows'
-        run: Compress-Archive -Path dist\Asteroids -DestinationPath Asteroids-Windows.zip
+        shell: bash
+        run: cd dist && 7z a ../Asteroids-Windows.zip Asteroids/
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4

@@ -1,14 +1,113 @@
-# Python-generated files
+# ===== Python =====
 __pycache__/
-*.py[oc]
+*.py[codz]
+*$py.class
+*.so
+
+# ===== Distribution / Packaging =====
 build/
 dist/
 wheels/
+sdist/
 *.egg-info
+*.egg
+.eggs/
+.Python
+MANIFEST
 
-# Virtual environments
+# ===== Virtual Environments =====
 .venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
 
-# From Asteroid Lesson:
+# ===== Environment / Secrets =====
+.env
+.env.*
+.envrc
+.pypirc
+
+# ===== IDE / Editor =====
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+Session.vim
+Sessionx.vim
+.netrwhist
+[._]*.un~
+.spyderproject
+.spyproject
+.ropeproject
+
+# ===== OS Files =====
+.DS_Store
+._*
+__MACOSX/
+.AppleDouble
+.LSOverride
+.Spotlight-V100
+.Trashes
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+[Dd]esktop.ini
+$RECYCLE.BIN/
+.Trash-*
+.fuse_hidden*
+.directory
+.nfs*
+nohup.out
+
+# ===== Testing / Coverage =====
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.hypothesis/
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+cover/
+
+# ===== Type Checking / Linting =====
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.ruff_cache/
+.pyre/
+.pytype/
+cython_debug/
+
+# ===== Logs =====
+*.log
+pip-log.txt
+pip-delete-this-directory.txt
+
+# ===== Jupyter =====
+.ipynb_checkpoints
+
+# ===== PyInstaller =====
+*.spec
+*.manifest
+
+# ===== Documentation =====
+docs/_build/
+/site
+
+# ===== Claude Code =====
+.claude/
+.claude.md
+CLAUDE.md
+CLAUDE.local.md
+
+# ===== Project-Specific =====
 game_state.jsonl
-
+game_events.jsonl
+high_scores.json

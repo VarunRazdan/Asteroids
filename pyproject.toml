@@ -1,9 +1,35 @@
 [project]
 name = "victor-asteroids-game"
-version = "0.1.0"
-description = "Add your description here"
+version = "0.2.0"
+description = "Classic Asteroids arcade game with retro neon aesthetics, power-ups, and chiptune audio"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "pygame==2.6.1",
+    "numpy>=1.26",
 ]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+    "ruff>=0.4",
+    "pip-audit>=2.7",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+markers = [
+    "slow: marks tests as slow (deselect with '-m not slow')",
+    "security: security-related tests",
+]
+filterwarnings = [
+    "ignore::DeprecationWarning:pygame.*",
+]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]

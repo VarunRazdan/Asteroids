@@ -158,7 +158,7 @@ class HUD:
 
         x = SCREEN_WIDTH - HUD_MARGIN - 120
         for i, (label, frac, color) in enumerate(bars):
-            y = HUD_MARGIN + i * 30
+            y = HUD_MARGIN + 60 + i * 30  # below audio toggle labels
             # Label
             label_surf = self.font.render(label, True, color)
             screen.blit(label_surf, (x, y))

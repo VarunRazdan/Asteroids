@@ -60,9 +60,9 @@ class HUD:
     SFX_ICON_POS = (SCREEN_WIDTH - HUD_MARGIN - 100, HUD_MARGIN + 28)
 
     def __init__(self):
-        self.font = pygame.font.Font(None, HUD_FONT_SIZE)
-        self.font_large = pygame.font.Font(None, HUD_FONT_SIZE_LARGE)
-        self.icon_font = pygame.font.Font(None, 20)
+        self.font = pygame.font.SysFont("arial", HUD_FONT_SIZE)
+        self.font_large = pygame.font.SysFont("arial", HUD_FONT_SIZE_LARGE)
+        self.icon_font = pygame.font.SysFont("arial", 20)
         self.score_popups = []
         self._score_scale = 1.0
         self._prev_score = 0
@@ -101,7 +101,7 @@ class HUD:
     def _draw_score(self, screen, score):
         text = f"{score:,}"
         size = int(HUD_FONT_SIZE_LARGE * self._score_scale)
-        font = pygame.font.Font(None, size)
+        font = pygame.font.SysFont("arial", size)
         surf = font.render(text, True, HUD_SCORE_COLOR)
         screen.blit(surf, (HUD_MARGIN, HUD_MARGIN))
 
@@ -123,7 +123,7 @@ class HUD:
         text = f"x{player.combo_multiplier}"
         pulse = 1.0 + 0.1 * math.sin(pygame.time.get_ticks() * 0.005)
         size = int(HUD_FONT_SIZE * pulse)
-        font = pygame.font.Font(None, size)
+        font = pygame.font.SysFont("arial", size)
         surf = font.render(text, True, HUD_COMBO_COLOR)
         x = HUD_MARGIN + 200
         screen.blit(surf, (x, HUD_MARGIN + 10))

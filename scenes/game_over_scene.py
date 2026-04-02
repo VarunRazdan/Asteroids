@@ -21,11 +21,11 @@ class GameOverScene(Scene):
         self.timer = 0
 
         # Fonts
-        self.title_font = pygame.font.Font(None, 72)
-        self.score_font = pygame.font.Font(None, 56)
-        self.prompt_font = pygame.font.Font(None, 32)
-        self.board_font = pygame.font.Font(None, 28)
-        self.entry_font = pygame.font.Font(None, 48)
+        self.title_font = pygame.font.SysFont("arial", 72)
+        self.score_font = pygame.font.SysFont("arial", 56)
+        self.prompt_font = pygame.font.SysFont("arial", 32)
+        self.board_font = pygame.font.SysFont("arial", 28)
+        self.entry_font = pygame.font.SysFont("arial", 48)
 
         # Pre-create overlay surface
         self._overlay = pygame.Surface(
@@ -177,7 +177,7 @@ class GameOverScene(Scene):
         """Draw the 3-character name entry interface."""
         pulse = 1.0 + 0.15 * math.sin(self.timer * 5)
         size = int(36 * pulse)
-        font = pygame.font.Font(None, size)
+        font = pygame.font.SysFont("arial", size)
         label = font.render("NEW HIGH SCORE!", True, NEON_GREEN)
         lr = label.get_rect(center=(SCREEN_WIDTH // 2, 200))
         screen.blit(label, lr)

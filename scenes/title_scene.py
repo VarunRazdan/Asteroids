@@ -30,12 +30,12 @@ class TitleScene(Scene):
 
         mono = "couriernew,courier,monospace"
         self.art_font = pygame.font.SysFont(mono, 22)
-        self.subtitle_font = pygame.font.Font(None, 40)
-        self.author_font = pygame.font.Font(None, 34)
-        self.link_font = pygame.font.Font(None, 28)
-        self.controls_font = pygame.font.Font(None, 26)
-        self.highscore_font = pygame.font.Font(None, 36)
-        self.version_font = pygame.font.Font(None, 24)
+        self.subtitle_font = pygame.font.SysFont("arial", 40)
+        self.author_font = pygame.font.SysFont("arial", 34)
+        self.link_font = pygame.font.SysFont("arial", 28)
+        self.controls_font = pygame.font.SysFont("arial", 26)
+        self.highscore_font = pygame.font.SysFont("arial", 36)
+        self.version_font = pygame.font.SysFont("arial", 24)
         self._high_score = Scoreboard().high_score()
 
     def on_enter(self):

@@ -110,11 +110,29 @@ cd Asteroids
 uv sync
 ```
 
-## Running
+## Running from Source
 
 ```bash
 uv run main.py
 ```
+
+## Building a Standalone App (macOS)
+
+No Python installation required for players:
+
+```bash
+# Install dev dependencies (includes PyInstaller)
+uv sync --group dev
+
+# Build the .app bundle
+uv run pyinstaller --onedir --windowed --name Asteroids \
+  --hidden-import=pygame._view --hidden-import=pygame.freetype \
+  --hidden-import=numpy main.py
+
+# The app is at dist/Asteroids.app — double-click to play!
+```
+
+High scores are saved to `~/.victor_asteroids/high_scores.json` so they persist across launches.
 
 ## Testing
 
@@ -135,7 +153,8 @@ uv run ruff check .
 
 - **Python 3.13** + **pygame 2.6.1** + **numpy**
 - **uv** for dependency management
-- **pytest** for testing (100+ tests)
+- **PyInstaller** for standalone app bundling
+- **pytest** for testing (150+ tests)
 - **ruff** for linting
 - **GitHub Actions** for CI/CD
 

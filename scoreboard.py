@@ -1,20 +1,32 @@
 """Persistent top-10 high score storage backed by a JSON file."""
 import json
 import os
+import sys
 
 from constants import SCOREBOARD_FILE, SCOREBOARD_MAX_ENTRIES
 
 
+def _get_score_path():
+    """Return the path for high_scores.json — works in dev and bundled app."""
+    if getattr(sys, "frozen", False):
+        # Bundled with PyInstaller — store in user home
+        app_dir = os.path.expanduser("~/.victor_asteroids")
+        os.makedirs(app_dir, exist_ok=True)
+        return os.path.join(app_dir, SCOREBOARD_FILE)
+    return SCOREBOARD_FILE
+
+
 class Scoreboard:
     def __init__(self):
+        self._path = _get_score_path()
         self._scores = self._load()
 
     def _load(self):
         """Read scores from disk. Returns empty list if file missing/corrupt."""
-        if not os.path.exists(SCOREBOARD_FILE):
+        if not os.path.exists(self._path):
             return []
         try:
-            with open(SCOREBOARD_FILE) as f:
+            with open(self._path) as f:
                 data = json.load(f)
             # Validate structure
             if not isinstance(data, list):
@@ -29,7 +41,7 @@ class Scoreboard:
     def _save(self):
         """Write current scores to disk."""
         try:
-            with open(SCOREBOARD_FILE, "w") as f:
+            with open(self._path, "w") as f:
                 json.dump(self._scores, f, indent=2)
         except OSError:
             pass

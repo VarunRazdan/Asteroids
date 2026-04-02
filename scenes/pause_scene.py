@@ -13,8 +13,8 @@ class PauseScene(Scene):
         super().__init__(manager)
         self.input_mgr = input_mgr
         self.timer = 0
-        self.font_large = pygame.font.Font(None, 72)
-        self.font_small = pygame.font.Font(None, 28)
+        self.font_large = pygame.font.SysFont("arial", 72)
+        self.font_small = pygame.font.SysFont("arial", 28)
 
     def handle_events(self, events):
         if self.input_mgr:
